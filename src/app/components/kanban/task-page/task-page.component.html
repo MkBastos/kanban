@@ -1,0 +1,127 @@
+<div>
+  <button
+    mat-raised-button
+    color="primary"
+    class="btn-menu"
+    (click)="addTask()"
+  >
+    + nova tarefa
+  </button>
+</div>
+<div class="container">
+  <div class="task-container">
+    <div class="task-title">
+      <h2 class="text-title">backlog</h2>
+    </div>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[cancelledList, doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="task-card" *ngFor="let item of todo" cdkDrag>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title class="card-title">
+              {{ item.title }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>descrição: {{ item.description }}</p>
+          <p>responsavel: {{ item.owner }}</p>
+        </mat-expansion-panel>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-container">
+    <div class="task-title">
+      <h2 class="text-title">execução</h2>
+    </div>
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList, finishedList, cancelledList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="task-card" *ngFor="let item of done" cdkDrag>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title class="card-title">
+              {{ item.title }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>descrição: {{ item.description }}</p>
+          <p>responsavel: {{ item.owner }}</p>
+        </mat-expansion-panel>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-container">
+    <div class="task-title">
+      <h2 class="text-title">finalizado</h2>
+    </div>
+    <div
+      cdkDropList
+      #finishedList="cdkDropList"
+      [cdkDropListData]="finished"
+      [cdkDropListConnectedTo]="[finishedList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="task-card" *ngFor="let item of finished" cdkDrag>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title class="card-title">
+              {{ item.title }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>descrição: {{ item.description }}</p>
+          <p>responsavel: {{ item.owner }}</p>
+        </mat-expansion-panel>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-container">
+    <div class="task-title">
+      <h2 class="text-title">cancelado</h2>
+    </div>
+    <div
+      cdkDropList
+      #cancelledList="cdkDropList"
+      [cdkDropListData]="cancelled"
+      [cdkDropListConnectedTo]="[cancelledList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="task-card" *ngFor="let item of cancelled" cdkDrag>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title class="card-title">
+              {{ item.title }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>descrição: {{ item.description }}</p>
+          <p>responsavel: {{ item.owner }}</p>
+        </mat-expansion-panel>
+      </div>
+    </div>
+  </div>
+</div>

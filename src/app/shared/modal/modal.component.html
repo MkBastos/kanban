@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Nova Tarefa</h1>
+<div mat-dialog-content>
+  <form [formGroup]="addTaskForm">
+    <div>
+      <mat-form-field appearance="fill" class="row">
+        <mat-label>Titulo</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="title" />
+        <mat-error *ngIf="addTaskForm.get('title')?.invalid"
+          >campo obrigatório</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Responsavel</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="description" />
+        <mat-error *ngIf="addTaskForm.get('owner')?.invalid"
+          >campo obrigatório</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" class="second-row">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="owner"></textarea>
+        <mat-error *ngIf="addTaskForm.get('owner')?.invalid">campo obrigatório</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="btn-field">
+  <button mat-raised-button color="warn" (click)="cancel()">fechar</button>
+  <button mat-raised-button color="primary" (click)="salvar()"[disabled]="addTaskForm.invalid">salvar</button>
+</div>

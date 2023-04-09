@@ -1,0 +1,50 @@
+<div class="header">
+  <h1>Gerencie suas tarefas</h1>
+</div>
+<div class="container">
+  <div class="content">
+    <div>
+      <h2>faça login para continuar</h2>
+      <form [formGroup]="loginForm" class="formulario">
+        <div>
+          <mat-form-field appearance="fill" class="fields">
+            <mat-label>usuário</mat-label>
+            <input
+              matInput
+              placeholder="pat@example.com"
+              formControlName="user"
+            />
+            <mat-error *ngIf="loginForm.get('user')?.invalid"
+              >usuário inválido</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill" class="fields">
+            <mat-label>senha</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="pat@example.com"
+              formControlName="password"
+            />
+            <mat-error *ngIf="loginForm.get('password')?.invalid"
+              >campo obrigatório</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </form>
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          class="btn"
+          (click)="login()"
+          [disabled]="loginForm.invalid"
+        >
+          entrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

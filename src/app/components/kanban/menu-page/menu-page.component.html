@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div class="toolbar-div">
+    <span>Bem vindo {{ nome }} </span>
+  </div>
+  <div class="links">
+    <mat-list class="list">
+      <mat-list-item><a routerLink="task" class="list-item">tarefas</a></mat-list-item>
+      <mat-list-item><a routerLink="dashboard" class="list-item">dashboard</a></mat-list-item>
+    </mat-list>
+  </div>
+  <button mat-button (click)="logout()">{{ button }}</button>
+</mat-toolbar>
+<router-outlet></router-outlet>
