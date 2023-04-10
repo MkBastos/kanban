@@ -40,7 +40,6 @@ export class TaskManagerService {
 
   addTask(body: ICard) {
     this.todo.push(body)
-    console.log(this.todo)
   }
 
   removeTask(item: any) {

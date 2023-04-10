@@ -42,10 +42,8 @@ export class ModalComponent implements OnInit {
   }
 
   salvar() {
-    console.log(this.addTaskForm.value);
     let date = new Date()
     this.addTaskForm.get('create_date')?.patchValue(date)
-    console.log(this.addTaskForm.value);
     let newTask: ICard = {
       title: this.addTaskForm.get('title')?.value,
       description: this.addTaskForm.get('description')?.value,

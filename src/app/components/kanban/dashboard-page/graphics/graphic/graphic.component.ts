@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 
 @Component({
@@ -17,23 +17,27 @@ export class GraphicComponent implements OnInit {
     { year: 2015, count: 30 },
     { year: 2016, count: 28 },
   ];
+
+  @Input() info!: any;
+
   constructor() {
     Chart.register(...registerables);
   }
 
   ngOnInit(): void {
     this.generateGraphic();
+    console.log(this.info)
   }
 
   generateGraphic() {
     new Chart(this.element.nativeElement, {
       type: 'line',
       data: {
-        labels: this.data.map((row) => row.year),
+        labels: this.info.map((row: any) => row.title),
         datasets: [
           {
-            label: 'Aquisição por ano',
-            data: this.data.map((row) => row.count),
+            label: 'Total de tarefas no mês',
+            data: this.info.map((row: any) => row.task.length),
           },
         ],
       },
