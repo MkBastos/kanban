@@ -11,7 +11,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Responsavel</mat-label>
-        <input matInput placeholder="pat@example.com" formControlName="description" />
+        <input matInput placeholder="pat@example.com" formControlName="owner" />
         <mat-error *ngIf="addTaskForm.get('owner')?.invalid"
           >campo obrigatório</mat-error
         >
@@ -20,7 +20,7 @@
     <div>
       <mat-form-field appearance="fill" class="second-row">
         <mat-label>Descrição</mat-label>
-        <textarea matInput formControlName="owner"></textarea>
+        <textarea matInput formControlName="description"></textarea>
         <mat-error *ngIf="addTaskForm.get('owner')?.invalid">campo obrigatório</mat-error>
       </mat-form-field>
     </div>

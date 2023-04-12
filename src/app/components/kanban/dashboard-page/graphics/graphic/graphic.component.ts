@@ -8,14 +8,12 @@ import { Chart, registerables } from 'chart.js';
 })
 export class GraphicComponent implements OnInit {
   @ViewChild('graphic', { static: true }) element!: ElementRef;
+
   data = [
-    { year: 2010, count: 10 },
-    { year: 2011, count: 20 },
-    { year: 2012, count: 15 },
-    { year: 2013, count: 25 },
-    { year: 2014, count: 22 },
-    { year: 2015, count: 30 },
-    { year: 2016, count: 28 },
+    {
+      owner: 'miqueias',
+      data: {mounth: 'janeiro', tasks: {title: 'todo', task: [{name: 'tarefa 1'}]}}
+    }
   ];
 
   @Input() info!: any;
@@ -26,7 +24,6 @@ export class GraphicComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateGraphic();
-    console.log(this.info)
   }
 
   generateGraphic() {

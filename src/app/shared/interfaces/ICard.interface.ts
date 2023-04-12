@@ -3,4 +3,6 @@ export interface ICard {
   description: string;
   owner: string;
   status?: string;
+  createdAt?: string;
+  finishedAt?: string
 }

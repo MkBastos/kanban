@@ -42,12 +42,11 @@ export class ModalComponent implements OnInit {
   }
 
   salvar() {
-    let date = new Date()
-    this.addTaskForm.get('create_date')?.patchValue(date)
     let newTask: ICard = {
       title: this.addTaskForm.get('title')?.value,
       description: this.addTaskForm.get('description')?.value,
       owner: this.addTaskForm.get('owner')?.value,
+      status: 'backlog'
     }
     this.service.addTask(newTask)
     this.cancel()

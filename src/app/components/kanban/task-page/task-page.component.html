@@ -31,8 +31,10 @@
               {{ item.title }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>descrição: {{ item.description }}</p>
           <p>responsavel: {{ item.owner }}</p>
+          <p>descrição: {{ item.description }}</p>
+          <p *ngIf="item.status">status: {{ item.status }}</p>
+          <p *ngIf="item.createdAt">iniciado em: {{ item.createdAt }}</p>
         </mat-expansion-panel>
       </div>
     </div>
@@ -60,8 +62,10 @@
               {{ item.title }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>descrição: {{ item.description }}</p>
           <p>responsavel: {{ item.owner }}</p>
+          <p>descrição: {{ item.description }}</p>
+          <p>status: {{ item.status }}</p>
+          <p>iniciado em: {{ item.createdAt }}</p>
         </mat-expansion-panel>
       </div>
     </div>
@@ -89,8 +93,10 @@
               {{ item.title }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>descrição: {{ item.description }}</p>
           <p>responsavel: {{ item.owner }}</p>
+          <p>descrição: {{ item.description }}</p>
+          <p>status: {{ item.status }}</p>
+          <p>finalizado em: {{ item.finishedAt }}</p>
         </mat-expansion-panel>
       </div>
     </div>
@@ -118,8 +124,9 @@
               {{ item.title }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>descrição: {{ item.description }}</p>
           <p>responsavel: {{ item.owner }}</p>
+          <p>descrição: {{ item.description }}</p>
+          <p>status: {{ item.status }}</p>
         </mat-expansion-panel>
       </div>
     </div>
