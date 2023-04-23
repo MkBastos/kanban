@@ -48,7 +48,7 @@ export class ModalComponent implements OnInit {
       owner: this.addTaskForm.get('owner')?.value,
       status: 'backlog'
     }
-    this.service.addTask(newTask)
+    this.service.addTask(newTask).subscribe()
     this.cancel()
   }
 }

@@ -1,38 +1,36 @@
 {
   "tasks": [
     {
+      "id": "1",
+      "title": "todo",
+      "description": "descrição da tarefa",
       "owner": "miqueias",
-      "mounth": "janeiro",
-      "backlog": [],
-      "todo": [
-        {
-          "title": "todo",
-          "description": "descrição da tarefa",
-          "owner": "miqueias",
-          "status": "todo",
-          "createdAt": "11-03-2023",
-          "finishedAt": "09-04-2023"
-        }
-      ],
-      "finished": [],
-      "cancelled": []
+      "status": "backlog",
+      "createdAt": "",
+      "finishedAt": "09-04-2023"
     },
     {
-      "owner": "testolino",
-      "mounth": "janeiro",
-      "backlog": [],
-      "todo": [
-        {
-          "title": "todo",
-          "description": "descrição da tarefa",
-          "owner": "testolino",
-          "status": "todo",
-          "createdAt": "11-02-2023",
-          "finishedAt": "13-03-2023"
-        }
-      ],
-      "finished": [],
-      "cancelled": []
+      "title": "teste 1",
+      "description": "teste descrição",
+      "owner": "miqueias",
+      "status": "cancelled",
+      "id": "0l3snyc"
+    },
+    {
+      "title": "teste 2",
+      "description": "teste 2",
+      "owner": "miqueias",
+      "status": "finished",
+      "id": "o41Ba9I",
+      "finishedAt": "23-4-2023  15:15"
+    },
+    {
+      "title": "teste 3 ",
+      "description": "asdbnm",
+      "owner": "miqueias",
+      "status": "finished",
+      "id": "JVwFJyD",
+      "finishedAt": "23-4-2023  15:15"
     }
   ]
 }
