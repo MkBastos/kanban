@@ -15,13 +15,13 @@
     </div>
     <div
       cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="todo"
+      #backlogList="cdkDropList"
+      [cdkDropListData]="backlog"
       [cdkDropListConnectedTo]="[cancelledList, executionList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="task-card" *ngFor="let item of todo" cdkDrag>
+      <div class="task-card" *ngFor="let item of backlog" cdkDrag>
         <mat-expansion-panel
           (opened)="panelOpenState = true"
           (closed)="panelOpenState = false"
@@ -48,7 +48,7 @@
       cdkDropList
       #executionList="cdkDropList"
       [cdkDropListData]="execution"
-      [cdkDropListConnectedTo]="[todoList, finishedList, cancelledList]"
+      [cdkDropListConnectedTo]="[backlogList, finishedList, cancelledList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
@@ -104,7 +104,7 @@
 
   <div class="task-container">
     <div class="task-title">
-      <h2 class="text-title">cancelado</h2>
+      <h2 class="text-title">cancelar</h2>
     </div>
     <div
       cdkDropList

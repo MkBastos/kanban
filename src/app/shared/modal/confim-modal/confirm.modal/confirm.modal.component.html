@@ -1,0 +1,6 @@
+<p>ao cancelar a tarefa, ela será excluida!</p>
+<p>você tem certeza que deseja excluir a tarefa <strong>{{data.task.title}}</strong>?</p>
+<div class="btn-group">
+  <button mat-raised-button color="warn" (click)="cancel()">cancelar</button>
+  <button mat-raised-button color="primary" (click)="deleteTask()">excluir</button>
+</div>

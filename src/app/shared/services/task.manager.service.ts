@@ -7,32 +7,31 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TaskManagerService {
-  readonly URL = 'http://localhost:3000';
-  todo: ICard[] = [];
-  execution: ICard[] = [];
-  finished: ICard[] = [];
-  cancelled: ICard[] = [];
+  private URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
-  getTasks() {
+  public getUsers(): Observable<any> {
+    return this.http.get(`${this.URL}/users`);
+  }
+
+  public getTasks() {
     return this.http.get(`${this.URL}/tasks`);
   }
 
-  getTasksByUser(user: string): Observable<any> {
+  public getTasksByUser(user: string): Observable<any> {
     return this.http.get(`${this.URL}/tasks?owner=${user}`);
   }
 
-  addTask(body: ICard) {
+  public addTask(body: ICard) {
     return this.http.post(`${this.URL}/tasks`, body);
   }
 
-  updateTask(id: any, body: any) {
-    console.log(body)
+  public updateTask(id: any, body: any) {
     return this.http.patch(`${this.URL}/tasks/${id}`, body);
   }
 
-  removeTask(item: any) {
-    console.log(item);
+  public deleteTask(item: any) {
+    return this.http.delete(`${this.URL}/tasks/${item.id}`)
   }
 }

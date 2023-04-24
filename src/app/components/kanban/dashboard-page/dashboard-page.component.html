@@ -5,29 +5,33 @@
     <mat-form-field appearance="fill">
       <mat-label>Selecione um colaborador</mat-label>
       <mat-select>
-        <mat-option *ngFor="let user of users" [value]="user">
-          {{ user }}
+        <mat-option
+          *ngFor="let user of users"
+          [value]="user.name"
+          (click)="filterByUser(user.name)"
+        >
+          {{ user.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div class="overview">
-    <div class="table" *ngFor="let list of tasksList">
-      <h3 class="table-title">{{ list.title }}</h3>
-      <p class="table-data">{{ list.task.length }}</p>
+    <div class="table" *ngFor="let item of tasksList">
+      <h3 class="table-title">{{ item.title }}</h3>
+      <p class="table-data">{{ item.task.length }}</p>
     </div>
   </div>
-  <div class="graphics">
-    <div class="content">
+  <div class="graphics" *ngIf="tasksList">
+    <div class="content" *ngIf="showGraphic">
       <h3>Tarefas</h3>
       <div class="graphic">
-        <app-graphic [info]="infoGraphic"></app-graphic>
+        <app-graphic [info]="tasksGraphic"></app-graphic>
       </div>
     </div>
-    <div class="content">
+    <div class="content" *ngIf="showGraphic">
       <h3>média de tempo</h3>
       <div class="graphic">
-        <app-graphic [info]="infoGraphic"></app-graphic>
+        <app-graphic [info]="tasksGraphic" [type]="averageGraphic"></app-graphic>
       </div>
     </div>
   </div>

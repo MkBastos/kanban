@@ -1,3 +1,4 @@
+import { TaskManagerService } from 'src/app/shared/services/task.manager.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,27 +10,60 @@ export class DashboardPageComponent implements OnInit {
 
   tasksList = [
     {
-      title: 'todo',
-      task: [{ tarefa: '1' }, { tarefa: '2' }, { tarefa: '3' }],
+      title: 'backlog',
+      task: [],
     },
-    { title: 'done', task: [{ tarefa: '1' }, { tarefa: '2' }] },
+    {
+      title: 'execution',
+      task: [],
+    },
     {
       title: 'finished',
-      task: [
-        { tarefa: '1' },
-        { tarefa: '2' },
-        { tarefa: '3' },
-        { tarefa: '4' },
-      ],
-    },
-    { title: 'cancelled', task: [{ tarefa: '1' }] },
+      task: [],
+    }
   ];
+  users!: any[];
+  showGraphic = true;
+  tasksGraphic = this.tasksList;
+  averageGraphic = true;
 
-  users = ['todos', 'teste 1', 'teste 2', 'teste 3'];
+  constructor(private service: TaskManagerService) {}
 
-  infoGraphic = this.tasksList;
+  ngOnInit(): void {
+    this.getUsers();
+  }
 
-  constructor() {}
+  getUsers() {
+    this.service.getUsers().subscribe((next) => {
+      this.users = next;
+    });
+  }
 
-  ngOnInit(): void {}
+  filterByUser(user: string) {
+    this.showGraphic = false;
+    this.service.getTasksByUser(user).subscribe((next) => {
+      this.tasksList = [
+        {
+          title: 'backlog',
+          task: next.filter(
+            (task: { status: string }) => task.status == 'backlog'
+          ),
+        },
+      ];
+      this.tasksList.push({
+        title: 'execution',
+        task: next.filter(
+          (task: { status: string }) => task.status == 'in execution'
+        ),
+      }),
+        this.tasksList.push({
+          title: 'finished',
+          task: next.filter(
+            (task: { status: string }) => task.status == 'finished'
+          ),
+        }),
+        this.tasksGraphic = this.tasksList;
+        this.showGraphic = true;
+    });
+  }
 }

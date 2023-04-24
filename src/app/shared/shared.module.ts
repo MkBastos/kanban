@@ -8,9 +8,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmModalComponent } from './modal/confim-modal/confirm.modal/confirm.modal.component';
 
 @NgModule({
-  declarations: [ModalComponent],
+  declarations: [ModalComponent, ConfirmModalComponent],
   imports: [
     CommonModule,
     MatDialogModule,

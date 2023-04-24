@@ -5,5 +5,6 @@ export interface ICard {
   owner: string;
   status?: string;
   createdAt?: string;
-  finishedAt?: string
+  finishedAt?: string;
+  averageTime?: string;
 }

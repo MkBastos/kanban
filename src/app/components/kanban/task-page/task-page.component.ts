@@ -9,6 +9,7 @@ import {
 import { ModalComponent } from '../../../shared/modal/modal.component';
 import { TaskManagerService } from '../../../shared/services/task.manager.service';
 import { map } from 'rxjs';
+import { ConfirmModalComponent } from 'src/app/shared/modal/confim-modal/confirm.modal/confirm.modal.component';
 
 @Component({
   selector: 'app-task-page',
@@ -16,7 +17,7 @@ import { map } from 'rxjs';
   styleUrls: ['./task-page.component.scss'],
 })
 export class TaskPageComponent implements OnInit {
-  todo: ICard[] = [];
+  backlog: ICard[] = [];
   execution: ICard[] = [];
   finished: ICard[] = [];
   cancelled: ICard[] = [];
@@ -27,7 +28,6 @@ export class TaskPageComponent implements OnInit {
   constructor(public dialog: MatDialog, private service: TaskManagerService) {}
 
   ngOnInit(): void {
-    this.calculateDiff();
     this.getTasksByUser();
   }
 
@@ -47,29 +47,28 @@ export class TaskPageComponent implements OnInit {
       );
       switch (event.container.element.nativeElement.id) {
         case 'cdk-drop-list-0':
-          let body = {
+          let backlog_body = {
             status: (event.container.data[0].status = 'backlog'),
             createdAt: (event.container.data[0].createdAt = ''),
           };
-          this.service.updateTask(event.container.data[0].id, body).subscribe();
+          this.service.updateTask(event.container.data[0].id, backlog_body).subscribe();
           break;
         case 'cdk-drop-list-1':
-          body = {
+          let execution_body = {
             status: (event.container.data[0].status = 'in execution'),
-            createdAt: (event.container.data[0].createdAt = `${this.getFormatedDate()}  ${this.getHour()}`),
+            createdAt: (event.container.data[0].createdAt = `${this.getFormatedDate()}  ${this.getFormatedHour()}`),
           };
-          this.service.updateTask(event.container.data[0].id, body).subscribe();
+          this.service.updateTask(event.container.data[0].id, execution_body).subscribe();
           break;
         case 'cdk-drop-list-2':
           let body_finished = {
             status: (event.container.data[0].status = 'finished'),
-            finishedAt: (event.container.data[0].finishedAt = `${this.getFormatedDate()}  ${this.getHour()}`),
+            finishedAt: (event.container.data[0].finishedAt = `${this.getFormatedDate()}  ${this.getFormatedHour()}`),
           };
           this.service.updateTask(event.container.data[0].id, body_finished).subscribe();
           break;
         case 'cdk-drop-list-3':
-          let body_cancelled = {status: event.container.data[0].status = 'cancelled'}
-          this.service.updateTask(event.container.data[0].id, body_cancelled).subscribe();
+          this.deleteTask(event.container.data[0])
           break;
       }
     }
@@ -83,49 +82,36 @@ export class TaskPageComponent implements OnInit {
     });
   }
 
+  deleteTask(task: ICard) {
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {data: {task}});
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getTasksByUser();
+    })
+  }
+
   getFormatedDate(): string {
     let date = new Date();
     let day = date.getDate();
     let month = date.getMonth();
     let year = date.getFullYear();
-    let formatedDate = `${day}-${month + 1}-${year}`;
+    let formatedDate = `${day}/${month + 1}/${year}`;
     return formatedDate;
   }
 
-  getHour() {
+  getFormatedHour() {
     let hours = new Date();
     let hour = hours.getHours();
     let minutes = hours.getMinutes();
-    let formatedHour = `${hour}:${minutes}`;
-    return formatedHour;
-  }
-
-  calculateDiff() {
-    let created = new Date(2023, 3, 12, 0, 29);
-    let finished = new Date(2023, 3, 12, 0, 30);
-    let createdInMs = created.getTime();
-    let finishedInMs = finished.getTime();
-    let diff = createdInMs - finishedInMs;
-
-    console.log(diff);
-    this.convertDiff(diff);
-  }
-
-  convertDiff(ms: number): string {
-    const minutes = Math.round(ms / 60000);
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
-
-    const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
-    const formattedMinutes =
-      remainingMinutes < 10 ? `0${remainingMinutes}` : `${remainingMinutes}`;
-
-    return `${formattedHours}:${formattedMinutes}`;
+    let formatedHour = (hour < 10 ? `0${hour}` : `${hour}`)
+    let formatedMinutes = (minutes < 10 ? `0${minutes}` : `${minutes}`)
+    let result = `${formatedHour}:${formatedMinutes}`
+    return result;
   }
 
   getTasksByUser() {
     this.service.getTasksByUser('miqueias').subscribe((next) => {
-      this.todo = next.filter(
+      this.backlog = next.filter(
         (task: { status: string }) => task.status == 'backlog'
       );
       this.execution = next.filter(
