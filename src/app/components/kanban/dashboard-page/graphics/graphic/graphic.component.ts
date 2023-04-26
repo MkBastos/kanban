@@ -78,25 +78,40 @@ export class GraphicComponent implements OnInit {
   }
 
   generateGraphic(type?: boolean) {
-    console.log(type)
     let label
+    let data
     if(type) {
+      data = this.info.filter((task: {title: string}) => task.title == 'finished')
+      data = data[0].task
       label = 'Média de tempo por tarefa'
+      return new Chart(this.element.nativeElement, {
+        type: 'bar',
+        data: {
+          labels: data.map((row: any) => row.title),
+          datasets: [
+            {
+              label: label,
+              data: data.map((row: any) => row.averageTime.replace(':', '.'))
+            },
+          ],
+        },
+      });
     } else {
+      data = this.info
       label = 'Total de tarefas no mês'
+      return new Chart(this.element.nativeElement, {
+        type: 'bar',
+        data: {
+          labels: data.map((row: any) => row.title),
+          datasets: [
+            {
+              label: label,
+              data: data.map((row: any) => row.task.length),
+            },
+          ],
+        },
+      });
     }
-    new Chart(this.element.nativeElement, {
-      type: 'line',
-      data: {
-        labels: this.info.map((row: any) => row.title),
-        datasets: [
-          {
-            label: label,
-            data: this.info.map((row: any) => row.task.length),
-          },
-        ],
-      },
-    });
   }
 
 }

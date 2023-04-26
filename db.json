@@ -5,32 +5,60 @@
       "title": "todo",
       "description": "descrição da tarefa",
       "owner": "miqueias",
-      "status": "backlog",
-      "createdAt": "",
-      "finishedAt": "09-04-2023"
-    },
-    {
-      "title": "teste 1",
-      "description": "teste descrição",
-      "owner": "miqueias",
-      "status": "cancelled",
-      "id": "0l3snyc"
+      "status": "in execution",
+      "createdAt": "23/4/2023 15:15",
+      "finishedAt": "09-04-2023 16:32"
     },
     {
       "title": "teste 2",
       "description": "teste 2",
       "owner": "miqueias",
-      "status": "finished",
-      "id": "o41Ba9I",
-      "finishedAt": "23-4-2023  15:15"
+      "status": "backlog",
+      "id": "o41Ba9I"
     },
     {
       "title": "teste 3 ",
       "description": "asdbnm",
       "owner": "miqueias",
-      "status": "finished",
+      "status": "in execution",
       "id": "JVwFJyD",
-      "finishedAt": "23-4-2023  15:15"
+      "createdAt": "24/4/2023 00:22"
+    },
+    {
+      "title": "teste 1",
+      "description": "teste de tarefas criada numero 1",
+      "owner": "miqueias",
+      "status": "in execution",
+      "id": "_bN63Oo",
+      "createdAt": "24/4/2023 00:24"
+    },
+    {
+      "title": "teste de tempo",
+      "description": "teste de tarefa com inicio e fim para calculo da media de tempo",
+      "owner": "miqueias",
+      "status": "finished",
+      "id": "E1Xyvgx",
+      "createdAt": "22/4/2023 18:18",
+      "finishedAt": "24/4/2023 00:12",
+      "averageTime": "29:54"
+    },
+    {
+      "title": "teste de tempo",
+      "description": "task que vou usar para calcular o tempo que ela ficou aberta",
+      "owner": "miqueias",
+      "status": "finished",
+      "id": "Xxxly6x",
+      "createdAt": "20/4/2023 23:23",
+      "finishedAt": "23/4/2023 00:01",
+      "averageTime": "48:38"
+    }
+  ],
+  "users": [
+    {
+      "name": "miqueias"
+    },
+    {
+      "name": "testolino"
     }
   ]
 }
