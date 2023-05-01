@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="showDash">
   <div class="filter">
     <h2>Dashboard</h2>
     <p>filtrar as tarefas por colaborador</p>
@@ -29,10 +29,13 @@
       </div>
     </div>
     <div class="content" *ngIf="showGraphic">
-      <h3>média de tempo</h3>
+      <h3>Tempo</h3>
       <div class="graphic">
         <app-graphic [info]="tasksGraphic" [type]="averageGraphic"></app-graphic>
       </div>
     </div>
+  </div>
+  <div class="btn">
+    <button mat-raised-button color="primary">mais detalhes</button>
   </div>
 </div>

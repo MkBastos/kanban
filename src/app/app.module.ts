@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { KanbanModule } from './components/kanban/kanban.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { InputMaskModule } from '@ngneat/input-mask';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
     KanbanModule,
     BrowserAnimationsModule,
     SharedModule,
+    InputMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]

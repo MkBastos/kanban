@@ -22,6 +22,7 @@ export class TaskPageComponent implements OnInit {
   finished: ICard[] = [];
   cancelled: ICard[] = [];
   allTasks: any;
+  showTasks = false
 
   panelOpenState = false;
 
@@ -56,14 +57,14 @@ export class TaskPageComponent implements OnInit {
         case 'cdk-drop-list-1':
           let execution_body = {
             status: (event.container.data[0].status = 'in execution'),
-            createdAt: (event.container.data[0].createdAt = `${this.getFormatedDate()}  ${this.getFormatedHour()}`),
+            createdAt: (event.container.data[0].createdAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
           };
           this.service.updateTask(event.container.data[0].id, execution_body).subscribe();
           break;
         case 'cdk-drop-list-2':
           let body_finished = {
             status: (event.container.data[0].status = 'finished'),
-            finishedAt: (event.container.data[0].finishedAt = `${this.getFormatedDate()}  ${this.getFormatedHour()}`),
+            finishedAt: (event.container.data[0].finishedAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
           };
           this.service.updateTask(event.container.data[0].id, body_finished).subscribe();
           break;
@@ -110,6 +111,7 @@ export class TaskPageComponent implements OnInit {
   }
 
   getTasksByUser() {
+    this.showTasks = false
     this.service.getTasksByUser('miqueias').subscribe((next) => {
       this.backlog = next.filter(
         (task: { status: string }) => task.status == 'backlog'
@@ -123,6 +125,7 @@ export class TaskPageComponent implements OnInit {
       this.cancelled = next.filter(
         (task: { status: string }) => task.status == 'cancelled'
       );
+      this.showTasks = true
     });
   }
 }

@@ -1,5 +1,5 @@
 import { TaskManagerService } from 'src/app/shared/services/task.manager.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-page.component.scss'],
 })
 export class DashboardPageComponent implements OnInit {
+
+  @Input() showDash = true;
 
   tasksList = [
     {
@@ -41,7 +43,9 @@ export class DashboardPageComponent implements OnInit {
 
   filterByUser(user: string) {
     this.showGraphic = false;
-    this.service.getTasksByUser(user).subscribe((next) => {
+    let userName = user.split(' ')
+    let owner = userName[0]
+    this.service.getTasksByUser(owner).subscribe((next) => {
       this.tasksList = [
         {
           title: 'backlog',

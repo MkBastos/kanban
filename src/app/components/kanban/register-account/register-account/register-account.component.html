@@ -1,52 +1,81 @@
 <mat-toolbar color="primary" class="toolbar">
   <div>
-    <span class="header">Cadastrar novo usuário </span>
+    <h1>Adicionar novo usuário</h1>
   </div>
 </mat-toolbar>
 <div class="container">
-  <h2>informe seus dados</h2>
-  <div class="form-body">
-    <form [formGroup]="addUserForm">
-      <div class="form-row">
-        <mat-form-field appearance="fill">
-          <mat-label>nome completo</mat-label>
-          <input matInput placeholder="digite seu nome completo" formControlName="name"/>
-          <mat-error>campo inválido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>data de nascimento</mat-label>
-          <input matInput placeholder="DD/MM/YYYY" formControlName="birth_date"/>
-          <mat-error>campo inválido</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="form-row">
-        <mat-form-field appearance="fill">
-          <mat-label>e-mail</mat-label>
-          <input matInput placeholder="digite seu e-mail" formControlName="email"/>
-          <mat-error>e-mail inválido</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>usuário</mat-label>
-          <input matInput placeholder="digite o usuário para login" formControlName="user"/>
-          <mat-error>usuário já existe</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="form-row">
-        <mat-form-field appearance="fill">
-          <mat-label>senha</mat-label>
-          <input matInput placeholder="digite a senha" type="password" formControlName="password"/>
-          <mat-error>campo obrigatório</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>confirme a senha</mat-label>
-          <input matInput placeholder="confirme a senha" type="password" formControlName="confirmPassword"/>
-          <mat-error>as senha não conferem</mat-error>
-        </mat-form-field>
-      </div>
-    </form>
-    <div class="btn">
-      <button mat-raised-button color="warn" routerLink="login">voltar</button>
-      <button mat-raised-button color="primary" (click)="submit()" [disabled]="addUserForm.invalid">salvar</button>
+  <form class="form-container" [formGroup]="addUserForm">
+    <div class="content">
+      <h2>informe login e senha</h2>
+      <mat-form-field appearance="fill">
+        <mat-label>usuário</mat-label>
+        <input
+          matInput
+          placeholder="digite o usuário para login"
+          formControlName="user"
+        />
+        <mat-error>usuário já existe</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>senha</mat-label>
+        <input
+          matInput
+          placeholder="digite a senha"
+          type="password"
+          formControlName="password"
+        />
+        <mat-error>campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>confirme a senha</mat-label>
+        <input
+          matInput
+          placeholder="confirme a senha"
+          type="password"
+          formControlName="confirmPassword"
+        />
+        <mat-error>as senha não conferem</mat-error>
+      </mat-form-field>
     </div>
+    <div class="content">
+      <h2>informe seus dados</h2>
+      <mat-form-field appearance="fill">
+        <mat-label>nome completo</mat-label>
+        <input
+          matInput
+          placeholder="digite seu nome completo"
+          formControlName="name"
+        />
+        <mat-error>campo inválido</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>data de nascimento</mat-label>
+        <input matInput placeholder="DD/MM/YYYY" formControlName="birth_date" [inputMask]="dateMask"/>
+        <mat-error>campo inválido</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>e-mail</mat-label>
+        <input
+          matInput
+          placeholder="digite seu e-mail"
+          formControlName="email"
+        />
+        <mat-error>e-mail inválido</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="footer">
+    <button mat-raised-button color="warn" class="btn" routerLink="login">
+      voltar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="btn"
+      (click)="submit()"
+      [disabled]="addUserForm.invalid"
+    >
+      salvar
+    </button>
   </div>
 </div>

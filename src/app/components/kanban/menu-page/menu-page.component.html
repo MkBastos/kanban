@@ -5,9 +5,9 @@
   </div>
   <button mat-button (click)="logout()">{{ button }}</button>
 </mat-toolbar>
-<mat-tab-group>
+<mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event, tabGroup)">
   <mat-tab label="dashboard">
-    <app-dashboard-page></app-dashboard-page>
+    <app-dashboard-page [showDash]="showDash"></app-dashboard-page>
   </mat-tab>
   <mat-tab label="tarefas">
     <app-task-page></app-task-page>

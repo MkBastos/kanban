@@ -13,6 +13,7 @@ export class LoginGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let isAuth = localStorage.getItem('isAuthorized')
+    console.log(ActivatedRouteSnapshot.name)
       if (isAuth == 'true') {
         return true
       }

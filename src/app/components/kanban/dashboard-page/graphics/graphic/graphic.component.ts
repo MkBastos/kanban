@@ -10,16 +10,6 @@ import { TaskManagerService } from 'src/app/shared/services/task.manager.service
 export class GraphicComponent implements OnInit {
   @ViewChild('graphic', { static: true }) element!: ElementRef;
 
-  data = [
-    {
-      owner: 'miqueias',
-      data: {
-        mounth: 'janeiro',
-        tasks: { title: 'todo', task: [{ name: 'tarefa 1' }] },
-      },
-    },
-  ];
-
   @Input() info!: any;
   @Input() type!: boolean;
 
@@ -83,7 +73,7 @@ export class GraphicComponent implements OnInit {
     if(type) {
       data = this.info.filter((task: {title: string}) => task.title == 'finished')
       data = data[0].task
-      label = 'Média de tempo por tarefa'
+      label = 'tempo por tarefa'
       return new Chart(this.element.nativeElement, {
         type: 'bar',
         data: {
@@ -91,7 +81,7 @@ export class GraphicComponent implements OnInit {
           datasets: [
             {
               label: label,
-              data: data.map((row: any) => row.averageTime.replace(':', '.'))
+              data: data.map((row: any) => row.averageTime?.replace(':', '.'))
             },
           ],
         },

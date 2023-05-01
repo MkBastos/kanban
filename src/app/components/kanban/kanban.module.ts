@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginPageComponent } from './login-page/login-page.component';
+import { LoginPageComponent } from './login-page/component/login-page.component';
+import { RegisterAccountComponent } from './register-account/register-account/register-account.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { TaskPageComponent } from './task-page/task-page.component';
 import { GraphicComponent } from './dashboard-page/graphics/graphic/graphic.component';
@@ -22,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { InputMaskModule } from '@ngneat/input-mask';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     TaskPageComponent,
     MenuPageComponent,
     GraphicComponent,
+    RegisterAccountComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSelectModule,
     MatListModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    InputMaskModule,
+    MatSnackBarModule
   ],
   providers: [LoginGuard],
 })

@@ -1,27 +1,30 @@
 .container {
-  width: 20rem;
-  margin-top: 2rem;
-  margin-left: auto;
-  margin-right: auto;
+  width: 30rem;
+  margin-right:auto;
+  margin-left:auto;
 }
 
-.header {
-  background-color: #3f51b5;
-  color: white;
-  height: 64px;
-}
-
-mat-form-field {
-  padding-bottom: 8px;
-  width: 100%;
-}
-
-.btn {
-  padding-top: 10px;
-  display: flex;
-  justify-content: space-between;
+.form-container {
+  padding: 3rem;
 }
 
 h2 {
   text-align: center;
+  padding: 10px;
 }
+
+mat-form-field {
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.footer {
+  display:flex;
+  justify-content: space-between;
+  margin: 3rem;
+}
+
+.btn {
+  width: 10rem;
+}
+

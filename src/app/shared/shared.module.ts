@@ -21,6 +21,7 @@ import { ConfirmModalComponent } from './modal/confim-modal/confirm.modal/confir
     MatInputModule,
     HttpClientModule
   ],
+  providers: []
 })
 export class SharedModule {}
 

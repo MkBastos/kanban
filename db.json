@@ -1,15 +1,6 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "todo",
-      "description": "descrição da tarefa",
-      "owner": "miqueias",
-      "status": "in execution",
-      "createdAt": "23/4/2023 15:15",
-      "finishedAt": "09-04-2023 16:32"
-    },
-    {
       "title": "teste 2",
       "description": "teste 2",
       "owner": "miqueias",
@@ -20,17 +11,17 @@
       "title": "teste 3 ",
       "description": "asdbnm",
       "owner": "miqueias",
-      "status": "in execution",
+      "status": "backlog",
       "id": "JVwFJyD",
-      "createdAt": "24/4/2023 00:22"
+      "createdAt": ""
     },
     {
       "title": "teste 1",
       "description": "teste de tarefas criada numero 1",
       "owner": "miqueias",
-      "status": "in execution",
+      "status": "backlog",
       "id": "_bN63Oo",
-      "createdAt": "24/4/2023 00:24"
+      "createdAt": ""
     },
     {
       "title": "teste de tempo",
@@ -51,6 +42,38 @@
       "createdAt": "20/4/2023 23:23",
       "finishedAt": "23/4/2023 00:01",
       "averageTime": "48:38"
+    },
+    {
+      "title": "tela de cadastro",
+      "description": "criar a tela para cadastro de novos usuários.",
+      "owner": "miqueias",
+      "status": "finished",
+      "id": "bWcG2RQ",
+      "createdAt": "25/4/2023 23:58",
+      "finishedAt": "27/4/2023 00:37",
+      "averageTime": "24:39"
+    },
+    {
+      "title": "POST novo usuário",
+      "description": "realizar o post do novo usuário no json-server.",
+      "owner": "miqueias",
+      "status": "in execution",
+      "id": "DxEaJ-9",
+      "createdAt": "27/4/2023 01:13"
+    },
+    {
+      "title": "BUG - Dashboard",
+      "description": "dashboard nao atualiza conforme alterações são feitas na tela de tarefas\n",
+      "owner": "miqueias",
+      "status": "backlog",
+      "id": "Sa12rPu"
+    },
+    {
+      "title": "BUG - tasks",
+      "description": "tela de task nao atualiza todas as vezes quando uma nova tarefa é cadastrada.",
+      "owner": "miqueias",
+      "status": "backlog",
+      "id": "KmWAIti"
     }
   ],
   "users": [
