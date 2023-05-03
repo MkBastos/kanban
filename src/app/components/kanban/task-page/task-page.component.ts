@@ -22,7 +22,6 @@ export class TaskPageComponent implements OnInit {
   finished: ICard[] = [];
   cancelled: ICard[] = [];
   allTasks: any;
-  showTasks = false
 
   panelOpenState = false;
 
@@ -52,24 +51,32 @@ export class TaskPageComponent implements OnInit {
             status: (event.container.data[0].status = 'backlog'),
             createdAt: (event.container.data[0].createdAt = ''),
           };
-          this.service.updateTask(event.container.data[0].id, backlog_body).subscribe();
+          this.service
+            .updateTask(event.container.data[0].id, backlog_body)
+            .subscribe();
           break;
         case 'cdk-drop-list-1':
           let execution_body = {
             status: (event.container.data[0].status = 'in execution'),
-            createdAt: (event.container.data[0].createdAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
+            createdAt:
+              (event.container.data[0].createdAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
           };
-          this.service.updateTask(event.container.data[0].id, execution_body).subscribe();
+          this.service
+            .updateTask(event.container.data[0].id, execution_body)
+            .subscribe();
           break;
         case 'cdk-drop-list-2':
           let body_finished = {
             status: (event.container.data[0].status = 'finished'),
-            finishedAt: (event.container.data[0].finishedAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
+            finishedAt:
+              (event.container.data[0].finishedAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
           };
-          this.service.updateTask(event.container.data[0].id, body_finished).subscribe();
+          this.service
+            .updateTask(event.container.data[0].id, body_finished)
+            .subscribe();
           break;
         case 'cdk-drop-list-3':
-          this.deleteTask(event.container.data[0])
+          this.deleteTask(event.container.data[0]);
           break;
       }
     }
@@ -84,11 +91,13 @@ export class TaskPageComponent implements OnInit {
   }
 
   deleteTask(task: ICard) {
-    const dialogRef = this.dialog.open(ConfirmModalComponent, {data: {task}});
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      data: { task },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       this.getTasksByUser();
-    })
+    });
   }
 
   getFormatedDate(): string {
@@ -104,15 +113,15 @@ export class TaskPageComponent implements OnInit {
     let hours = new Date();
     let hour = hours.getHours();
     let minutes = hours.getMinutes();
-    let formatedHour = (hour < 10 ? `0${hour}` : `${hour}`)
-    let formatedMinutes = (minutes < 10 ? `0${minutes}` : `${minutes}`)
-    let result = `${formatedHour}:${formatedMinutes}`
+    let formatedHour = hour < 10 ? `0${hour}` : `${hour}`;
+    let formatedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    let result = `${formatedHour}:${formatedMinutes}`;
     return result;
   }
 
   getTasksByUser() {
-    this.showTasks = false
-    this.service.getTasksByUser('miqueias').subscribe((next) => {
+    let user = localStorage.getItem('user');
+    return this.service.getTasksByUser(user).subscribe((next) => {
       this.backlog = next.filter(
         (task: { status: string }) => task.status == 'backlog'
       );
@@ -125,7 +134,6 @@ export class TaskPageComponent implements OnInit {
       this.cancelled = next.filter(
         (task: { status: string }) => task.status == 'cancelled'
       );
-      this.showTasks = true
     });
   }
 }

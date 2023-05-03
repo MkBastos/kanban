@@ -32,10 +32,11 @@ export class ModalComponent implements OnInit {
   }
 
   createForm() {
+    let user = localStorage.getItem('user')
     this.addTaskForm = this.formBuilder.group({
       title: new FormControl(null, [Validators.required]),
       description: new FormControl(),
-      owner: new FormControl(),
+      owner: new FormControl({value: user, disabled: true}),
       status: new FormControl(),
       create_date: new FormControl(),
     });

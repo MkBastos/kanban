@@ -12,13 +12,13 @@ export class LoginService {
 
   validate(data: any) {
     let login = {user: '', password: ''}
-    console.log('data', data)
     this.service.getUserById(data.user).subscribe(
       next => {
         login.user = next[0].user
         login.password = next[0].password
         if (data.user == login.user && data.password == login.password) {
           localStorage.setItem('isAuthorized', 'true')
+          localStorage.setItem('user', login.user)
           this.router.navigate(['home'])
         } else {
           localStorage.setItem('isAuthorized', 'false')

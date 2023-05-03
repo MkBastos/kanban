@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { TaskManagerService } from 'src/app/shared/services/task.manager.service';
 
@@ -40,11 +40,13 @@ export class GraphicComponent implements OnInit {
     let convertedFinishedDate = this.convertDateLocation(item.finishedAt);
     let createdTime = new Date(convertedCreatedDate);
     let finishedTime = new Date(convertedFinishedDate);
-    const diffInMs: number = Math.abs(createdTime.getTime() - finishedTime.getTime());
+    const diffInMs: number = Math.abs(
+      createdTime.getTime() - finishedTime.getTime()
+    );
     let body = {
-      averageTime: this.convertDiff(diffInMs)
-    }
-    this.service.updateTask(item.id, body).subscribe()
+      averageTime: this.convertDiff(diffInMs),
+    };
+    this.service.updateTask(item.id, body).subscribe();
   }
 
   convertDiff(ms: number): string {
@@ -52,28 +54,35 @@ export class GraphicComponent implements OnInit {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
     const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
-    const formattedMinutes = remainingMinutes < 10 ? `0${remainingMinutes}` : `${remainingMinutes}`;
+    const formattedMinutes =
+      remainingMinutes < 10 ? `0${remainingMinutes}` : `${remainingMinutes}`;
     return `${formattedHours}:${formattedMinutes}`;
   }
 
   convertDateLocation(date: string) {
-    let day = Number(date.slice(0, 2));
-    let formatedDay = day < 10 ? `0${day}` : `${day}`
-    let month = Number(date.slice(3, 4))
-    let formatedMonth = month < 10 ? `0${month}` : `${month}`
-    let year = date.slice(5, 9);
-    let hour = date.slice(10, 12);
-    let minute = date.slice(13, 15);
+    let formatedDate = date.split('/');
+    let day = Number(formatedDate[0]);
+    let formatedDay = day < 10 ? `0${day}` : `${day}`;
+    let month = Number(formatedDate[1]);
+    let formatedMonth = month < 10 ? `0${month}` : `${month}`;
+    let formatedYear = formatedDate[2].split(' ');
+    let year = formatedYear[0];
+    let formatedHour = formatedYear[1];
+    let newHour = formatedHour.split(':');
+    let hour = newHour[0];
+    let minute = newHour[1];
     return `${year}-${formatedMonth}-${formatedDay}T${hour}:${minute}`;
   }
 
   generateGraphic(type?: boolean) {
-    let label
-    let data
-    if(type) {
-      data = this.info.filter((task: {title: string}) => task.title == 'finished')
-      data = data[0].task
-      label = 'tempo por tarefa'
+    let label;
+    let data;
+    if (type) {
+      data = this.info.filter(
+        (task: { title: string }) => task.title == 'finished'
+      );
+      data = data[0].task;
+      label = 'tempo por tarefa';
       return new Chart(this.element.nativeElement, {
         type: 'bar',
         data: {
@@ -81,14 +90,14 @@ export class GraphicComponent implements OnInit {
           datasets: [
             {
               label: label,
-              data: data.map((row: any) => row.averageTime?.replace(':', '.'))
+              data: data.map((row: any) => row.averageTime?.replace(':', '.')),
             },
           ],
         },
       });
     } else {
-      data = this.info
-      label = 'Total de tarefas no mês'
+      data = this.info;
+      label = 'Total de tarefas no mês';
       return new Chart(this.element.nativeElement, {
         type: 'bar',
         data: {
@@ -103,5 +112,4 @@ export class GraphicComponent implements OnInit {
       });
     }
   }
-
 }

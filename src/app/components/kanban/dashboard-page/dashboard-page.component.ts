@@ -1,14 +1,14 @@
 import { TaskManagerService } from 'src/app/shared/services/task.manager.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss'],
 })
-export class DashboardPageComponent implements OnInit {
+export class DashboardPageComponent implements OnInit, OnChanges {
 
-  @Input() showDash = true;
+  @Input() showDash!: boolean;
 
   tasksList = [
     {
@@ -22,7 +22,7 @@ export class DashboardPageComponent implements OnInit {
     {
       title: 'finished',
       task: [],
-    }
+    },
   ];
   users!: any[];
   showGraphic = true;
@@ -35,6 +35,32 @@ export class DashboardPageComponent implements OnInit {
     this.getUsers();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (!this.showDash) {
+      this.tasksList = [
+        {
+          title: 'backlog',
+          task: [],
+        },
+        {
+          title: 'execution',
+          task: [],
+        },
+        {
+          title: 'finished',
+          task: [],
+        },
+      ];
+      this.tasksGraphic = this.tasksList
+      this.showGraphic = false;
+
+        setTimeout(() => {
+          this.showGraphic = true
+        }, 100)
+      }
+
+  }
+
   getUsers() {
     this.service.getUsers().subscribe((next) => {
       this.users = next;
@@ -43,8 +69,8 @@ export class DashboardPageComponent implements OnInit {
 
   filterByUser(user: string) {
     this.showGraphic = false;
-    let userName = user.split(' ')
-    let owner = userName[0]
+    let owner = this.users.filter((res: { name: string }) => res.name == user);
+    owner = owner[0].user;
     this.service.getTasksByUser(owner).subscribe((next) => {
       this.tasksList = [
         {
@@ -66,8 +92,8 @@ export class DashboardPageComponent implements OnInit {
             (task: { status: string }) => task.status == 'finished'
           ),
         }),
-        this.tasksGraphic = this.tasksList;
-        this.showGraphic = true;
+        (this.tasksGraphic = this.tasksList);
+      this.showGraphic = true;
     });
   }
 }

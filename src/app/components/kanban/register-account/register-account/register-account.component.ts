@@ -43,17 +43,13 @@ export class RegisterAccountComponent implements OnInit {
 
   getPassword() {
     if (this.addUserForm.get('password')?.value) {
-      this.password = this.addUserForm.get('password')?.valueChanges.subscribe(
-        next => console.log(next)
-      )
+      this.password = this.addUserForm.get('password')?.valueChanges.subscribe()
     }
   }
 
   submit() {
-    console.log(this.addUserForm.value)
     this.service.addNewUser(this.addUserForm.value).subscribe(
       next => {
-        console.log(next)
         this.openSnackBar('conta criada com sucesso', 'x')
       }
     )

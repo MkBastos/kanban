@@ -19,7 +19,6 @@ export class TaskManagerService {
     return this.http.get(`${this.URL}/users?user=${user}`)
   }
   public addNewUser(body: any) {
-    console.log(`${this.URL}/users`)
     return this.http.post(`${this.URL}/users`, body)
   }
 
@@ -27,7 +26,7 @@ export class TaskManagerService {
     return this.http.get(`${this.URL}/tasks`);
   }
 
-  public getTasksByUser(user: string): Observable<any> {
+  public getTasksByUser(user: any): Observable<any> {
     return this.http.get(`${this.URL}/tasks?owner=${user}`);
   }
 

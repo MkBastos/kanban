@@ -8,17 +8,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu-page.component.scss'],
 })
 export class MenuPageComponent implements OnInit {
-  nome = 'Miqueias';
+  logedUser!: any;
   button = 'logout';
   tabLoadTimes: Date[] = [];
-  showDash = true;
+  showDash:boolean = true;
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getLogedUser()
+  }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent, tabGroup: any): boolean {
     return this.showDash = tabGroup._allTabs.first.isActive;
+  }
+
+  getLogedUser() {
+    this.logedUser = localStorage.getItem('user');
   }
 
   logout() {
