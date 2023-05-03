@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './login-page/component/login-page.component';
 import { RegisterAccountComponent } from './register-account/register-account/register-account.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { TaskPageComponent } from './task-page/task-page.component';
-import { GraphicComponent } from './dashboard-page/graphics/graphic/graphic.component';
 import { LoginGuard } from './login-page/guard/login-guard.guard';
 import { MenuPageComponent } from './menu-page/menu-page.component';
 import { KanbanRoutingModule } from './kanban.routing.module';
@@ -24,6 +22,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { InputMaskModule } from '@ngneat/input-mask';
+import { DashboardPageComponent } from './dashboard-page/dashboard/dashboard-page.component';
+import { GraphicComponent } from './dashboard-page/graphics/graphic/graphic.component';
 
 @NgModule({
   declarations: [

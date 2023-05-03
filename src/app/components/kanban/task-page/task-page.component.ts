@@ -43,42 +43,46 @@ export class TaskPageComponent implements OnInit {
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        0
       );
-      switch (event.container.element.nativeElement.id) {
-        case 'cdk-drop-list-0':
-          let backlog_body = {
-            status: (event.container.data[0].status = 'backlog'),
-            createdAt: (event.container.data[0].createdAt = ''),
-          };
-          this.service
-            .updateTask(event.container.data[0].id, backlog_body)
-            .subscribe();
-          break;
-        case 'cdk-drop-list-1':
-          let execution_body = {
-            status: (event.container.data[0].status = 'in execution'),
-            createdAt:
-              (event.container.data[0].createdAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
-          };
-          this.service
-            .updateTask(event.container.data[0].id, execution_body)
-            .subscribe();
-          break;
-        case 'cdk-drop-list-2':
-          let body_finished = {
-            status: (event.container.data[0].status = 'finished'),
-            finishedAt:
-              (event.container.data[0].finishedAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
-          };
-          this.service
-            .updateTask(event.container.data[0].id, body_finished)
-            .subscribe();
-          break;
-        case 'cdk-drop-list-3':
-          this.deleteTask(event.container.data[0]);
-          break;
-      }
+      this.updateMovedTasks(event)
+    }
+  }
+
+  updateMovedTasks(event: CdkDragDrop<ICard[]>) {
+    switch (event.container.element.nativeElement.id) {
+      case 'cdk-drop-list-0':
+        let backlog_body = {
+          status: (event.container.data[0].status = 'backlog'),
+          createdAt: (event.container.data[0].createdAt = ''),
+        };
+        this.service
+          .updateTask(event.container.data[0].id, backlog_body)
+          .subscribe();
+        break;
+      case 'cdk-drop-list-1':
+        let execution_body = {
+          status: (event.container.data[0].status = 'in execution'),
+          createdAt:
+            (event.container.data[0].createdAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
+        };
+        this.service
+          .updateTask(event.container.data[0].id, execution_body)
+          .subscribe();
+        break;
+      case 'cdk-drop-list-2':
+        let body_finished = {
+          status: (event.container.data[0].status = 'finished'),
+          finishedAt:
+            (event.container.data[0].finishedAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
+        };
+        this.service
+          .updateTask(event.container.data[0].id, body_finished)
+          .subscribe();
+        break;
+      case 'cdk-drop-list-3':
+        this.deleteTask(event.container.data[0]);
+        break;
     }
   }
 

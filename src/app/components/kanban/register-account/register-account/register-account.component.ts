@@ -50,7 +50,7 @@ export class RegisterAccountComponent implements OnInit {
   submit() {
     this.service.addNewUser(this.addUserForm.value).subscribe(
       next => {
-        this.openSnackBar('conta criada com sucesso', 'x')
+        this.openSnackBar('conta criada com sucesso','')
       }
     )
   }

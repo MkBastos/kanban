@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Graficos
+Graficos criados com a biblioteca Chart.js.
+para mais informações acesse (https://chartjs.org).
+
+## Mascaras
+Mascaras para os inputs criados com a biblioteca ngneat.
+para mais informações acesse (https://github.com/ngneat/input-mask).

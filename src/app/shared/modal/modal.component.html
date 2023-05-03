@@ -9,11 +9,11 @@
           >campo obrigatório</mat-error
         >
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Responsavel</mat-label>
-        <input matInput placeholder="pat@example.com" formControlName="owner" />
-        <mat-error *ngIf="addTaskForm.get('owner')?.invalid"
-          >campo obrigatório</mat-error
+      <mat-form-field #deadline appearance="fill">
+        <mat-label>Prazo final</mat-label>
+        <input matInput placeholder="dd/mm/yyyy" formControlName="deadline" [inputMask]="dateMask"/>
+        <mat-error *ngIf="addTaskForm.get('deadline')?.invalid"
+          >{{getErrorMessage(deadline)}}</mat-error
         >
       </mat-form-field>
     </div>

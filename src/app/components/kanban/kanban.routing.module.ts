@@ -1,6 +1,6 @@
 import { GraphicComponent } from './dashboard-page/graphics/graphic/graphic.component';
 import { TaskPageComponent } from './task-page/task-page.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { DashboardPageComponent } from './dashboard-page/dashboard/dashboard-page.component';
 import { LoginPageComponent } from './login-page/component/login-page.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';

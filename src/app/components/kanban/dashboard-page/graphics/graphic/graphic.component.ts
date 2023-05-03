@@ -31,11 +31,11 @@ export class GraphicComponent implements OnInit {
 
   getTaskTime(list: any) {
     for (let item of list) {
-      this.calculateAverageTime(item);
+      this.calculateDurationTime(item);
     }
   }
 
-  calculateAverageTime(item: any) {
+  calculateDurationTime(item: any) {
     let convertedCreatedDate = this.convertDateLocation(item.createdAt);
     let convertedFinishedDate = this.convertDateLocation(item.finishedAt);
     let createdTime = new Date(convertedCreatedDate);
@@ -44,7 +44,7 @@ export class GraphicComponent implements OnInit {
       createdTime.getTime() - finishedTime.getTime()
     );
     let body = {
-      averageTime: this.convertDiff(diffInMs),
+      duration: this.convertDiff(diffInMs),
     };
     this.service.updateTask(item.id, body).subscribe();
   }
@@ -90,8 +90,12 @@ export class GraphicComponent implements OnInit {
           datasets: [
             {
               label: label,
-              data: data.map((row: any) => row.averageTime?.replace(':', '.')),
+              data: data.map((row: any) => row.duration?.replace(':', '.')),
             },
+            {
+              label: 'sla',
+              data: data.map((row: any) => row.deadline)
+          }
           ],
         },
       });

@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmModalComponent } from './modal/confim-modal/confirm.modal/confirm.modal.component';
+import { InputMaskModule } from '@ngneat/input-mask';
 
 @NgModule({
   declarations: [ModalComponent, ConfirmModalComponent],
@@ -19,7 +20,8 @@ import { ConfirmModalComponent } from './modal/confim-modal/confirm.modal/confir
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    InputMaskModule
   ],
   providers: []
 })

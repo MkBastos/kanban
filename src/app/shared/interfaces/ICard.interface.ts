@@ -6,5 +6,6 @@ export interface ICard {
   status?: string;
   createdAt?: string;
   finishedAt?: string;
-  averageTime?: string;
+  duration?: string;
+  deadline?: string;
 }
