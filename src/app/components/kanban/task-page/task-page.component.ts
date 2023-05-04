@@ -22,8 +22,9 @@ export class TaskPageComponent implements OnInit {
   finished: ICard[] = [];
   cancelled: ICard[] = [];
   allTasks: any;
-
+  showTasks = true;
   panelOpenState = false;
+  subscription: any;
 
   constructor(public dialog: MatDialog, private service: TaskManagerService) {}
 
@@ -56,7 +57,7 @@ export class TaskPageComponent implements OnInit {
           status: (event.container.data[0].status = 'backlog'),
           createdAt: (event.container.data[0].createdAt = ''),
         };
-        this.service
+        this.subscription = this.service
           .updateTask(event.container.data[0].id, backlog_body)
           .subscribe();
         break;
@@ -67,7 +68,7 @@ export class TaskPageComponent implements OnInit {
             (event.container.data[0].createdAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
           sla: this.calculateDurationTime(event.container.data[0], true),
         };
-        this.service
+        this.subscription = this.service
           .updateTask(event.container.data[0].id, execution_body)
           .subscribe();
         break;
@@ -79,7 +80,7 @@ export class TaskPageComponent implements OnInit {
           duration: this.calculateDurationTime(event.container.data[0]),
         };
         console.log('>>>', body_finished);
-        this.service
+        this.subscription = this.service
           .updateTask(event.container.data[0].id, body_finished)
           .subscribe();
         break;
@@ -93,8 +94,24 @@ export class TaskPageComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalComponent, {});
 
     dialogRef.afterClosed().subscribe((result) => {
+      this.showTasks = false;
       this.getTasksByUser();
+      this.showTasks = true;
     });
+  }
+
+  editTask(item: any) {
+    console.log(item)
+    this.subscription = this.service.getTaskById(item).subscribe(
+      next => {
+        const dialogRef = this.dialog.open(ModalComponent, {data: next})
+        dialogRef.afterClosed().subscribe((result) => {
+          this.showTasks = false;
+          this.getTasksByUser();
+          this.showTasks = true;
+        })
+      }
+    )
   }
 
   deleteTask(task: ICard) {
@@ -128,7 +145,7 @@ export class TaskPageComponent implements OnInit {
 
   getTasksByUser() {
     let user = localStorage.getItem('user');
-    return this.service.getTasksByUser(user).subscribe((next) => {
+    return this.subscription = this.service.getTasksByUser(user).subscribe((next) => {
       this.backlog = next.filter(
         (task: { status: string }) => task.status == 'backlog'
       );
@@ -191,5 +208,9 @@ export class TaskPageComponent implements OnInit {
     let hour = newHour[0];
     let minute = newHour[1];
     return `${year}-${formatedMonth}-${formatedDay}T${hour}:${minute}`;
+  }
+
+  onDestroy() {
+    this.subscription.unsubscribe()
   }
 }

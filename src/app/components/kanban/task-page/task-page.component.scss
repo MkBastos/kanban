@@ -49,6 +49,19 @@
   font-weight: 500;
 }
 
+.card-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-icon {
+  font-size: 16px;
+}
+
 .example-list {
   min-height: 10px;
+}
+
+i {
+  font-weight: 500;
 }

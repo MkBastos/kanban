@@ -31,10 +31,13 @@
               {{ item.title }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>responsavel: {{ item.owner }}</p>
-          <p>descrição: {{ item.description }}</p>
-          <p *ngIf="item.status">status: {{ item.status }}</p>
-          <p *ngIf="item.createdAt">iniciado em: {{ item.createdAt }}</p>
+          <div class="card-btn">
+            <p><i>responsavel: </i> {{ item.owner }}</p>
+            <button mat-button (click)="editTask(item.id)"><mat-icon class="card-icon">edit</mat-icon></button>
+          </div>
+          <p><i>descrição:</i> {{ item.description }}</p>
+          <p><i>status:</i> {{ item.status }}</p>
+          <p><i>previsão de entrega:</i> {{ item.deadline}}</p>
         </mat-expansion-panel>
       </div>
     </div>
@@ -59,14 +62,17 @@
         >
           <mat-expansion-panel-header>
             <mat-panel-title class="card-title">
-              {{ item.title }}
+             {{ item.title }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>responsavel: {{ item.owner }}</p>
-          <p>descrição: {{ item.description }}</p>
-          <p>status: {{ item.status }}</p>
-          <p>iniciado em: {{ item.createdAt }}</p>
-          <p>previsão de entrega: {{item.deadline}}</p>
+          <div class="card-btn">
+            <p><i>responsavel: </i> {{ item.owner }}</p>
+            <button mat-button (click)="editTask(item.id)"><mat-icon class="card-icon">edit</mat-icon></button>
+          </div>
+          <p><i>descrição:</i> {{ item.description }}</p>
+          <p><i>status:</i> {{ item.status }}</p>
+          <p><i>iniciado em:</i> {{ item.createdAt }}</p>
+          <p><i>previsão de entrega:</i> {{ item.deadline}}</p>
         </mat-expansion-panel>
       </div>
     </div>
@@ -94,11 +100,12 @@
               {{ item.title }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>responsavel: {{ item.owner }}</p>
-          <p>descrição: {{ item.description }}</p>
-          <p>status: {{ item.status }}</p>
-          <p>previsão de entrega: {{item.deadline}}</p>
-          <p>finalizado em: {{ item.finishedAt }}</p>
+          <p><i>responsavel: </i> {{ item.owner }}</p>
+          <p><i>descrição:</i> {{ item.description }}</p>
+          <p><i>status:</i> {{ item.status }}</p>
+          <p><i>iniciado em:</i> {{ item.createdAt }}</p>
+          <p *ngIf="item.deadline"><i>previsão de entrega:</i> {{ item.deadline}}</p>
+          <p><i>finalizado em: </i>{{ item.finishedAt }}</p>
         </mat-expansion-panel>
       </div>
     </div>

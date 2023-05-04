@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ICard } from '../interfaces/ICard.interface';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +24,12 @@ export class TaskManagerService {
 
   public getTasks() {
     return this.http.get(`${this.URL}/tasks`);
+  }
+
+  public getTaskById(id: string) {
+    return this.http.get(`${this.URL}/tasks/${id}`).pipe(
+      take(1)
+    )
   }
 
   public getTasksByUser(user: any): Observable<any> {
