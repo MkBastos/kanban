@@ -45,7 +45,7 @@ export class TaskPageComponent implements OnInit {
         event.previousIndex,
         0
       );
-      this.updateMovedTasks(event)
+      this.updateMovedTasks(event);
     }
   }
 
@@ -65,6 +65,7 @@ export class TaskPageComponent implements OnInit {
           status: (event.container.data[0].status = 'in execution'),
           createdAt:
             (event.container.data[0].createdAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
+          sla: this.calculateDurationTime(event.container.data[0], true),
         };
         this.service
           .updateTask(event.container.data[0].id, execution_body)
@@ -75,9 +76,9 @@ export class TaskPageComponent implements OnInit {
           status: (event.container.data[0].status = 'finished'),
           finishedAt:
             (event.container.data[0].finishedAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
-          duration: this.calculateDurationTime(event.container.data[0])
+          duration: this.calculateDurationTime(event.container.data[0]),
         };
-        console.log('>>>',body_finished)
+        console.log('>>>', body_finished);
         this.service
           .updateTask(event.container.data[0].id, body_finished)
           .subscribe();
@@ -143,15 +144,27 @@ export class TaskPageComponent implements OnInit {
     });
   }
 
-  calculateDurationTime(item: any) {
-    let convertedCreatedDate = this.convertDateFormat(item.createdAt);
-    let convertedFinishedDate = this.convertDateFormat(item.finishedAt);
+  calculateDurationTime(item: ICard, deadline?: boolean) {
+    console.log('>', item.deadline);
+    let convertedCreatedDate = this.convertDateFormat(item.createdAt as any);
     let createdTime = new Date(convertedCreatedDate);
-    let finishedTime = new Date(convertedFinishedDate);
-    const diffInMs: number = Math.abs(
-      createdTime.getTime() - finishedTime.getTime()
-    );
-    return this.convertDiff(diffInMs)
+    if (!deadline) {
+      let convertedFinishedDate = this.convertDateFormat(
+        item.finishedAt as any
+      );
+      let finishedTime = new Date(convertedFinishedDate);
+      const diffInMs: number = Math.abs(
+        createdTime.getTime() - finishedTime.getTime()
+      );
+      return this.convertDiff(diffInMs);
+    } else {
+      let convertedDeadlineDate = this.convertDateFormat(item.deadline as any);
+      let deadlineTime = new Date(convertedDeadlineDate);
+      const diffInMs: number = Math.abs(
+        createdTime.getTime() - deadlineTime.getTime()
+      );
+      return this.convertDiff(diffInMs);
+    }
   }
 
   convertDiff(ms: number): string {
@@ -165,6 +178,7 @@ export class TaskPageComponent implements OnInit {
   }
 
   convertDateFormat(date: string) {
+    console.log('>>>', date);
     let formatedDate = date.split('/');
     let day = Number(formatedDate[0]);
     let formatedDay = day < 10 ? `0${day}` : `${day}`;

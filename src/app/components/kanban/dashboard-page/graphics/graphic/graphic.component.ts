@@ -47,8 +47,9 @@ export class GraphicComponent implements OnInit {
               data: data.map((row: any) => row.duration?.replace(':', '.')),
             },
             {
+              type: 'line',
               label: 'sla',
-              data: data.map((row: any) => row.deadline)
+              data: data.map((row: any) => row.sla?.replace(':', '.'))
           }
           ],
         },

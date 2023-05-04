@@ -8,4 +8,5 @@ export interface ICard {
   finishedAt?: string;
   duration?: string;
   deadline?: string;
+  sla?: string;
 }
