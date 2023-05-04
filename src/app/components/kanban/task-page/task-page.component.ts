@@ -75,7 +75,9 @@ export class TaskPageComponent implements OnInit {
           status: (event.container.data[0].status = 'finished'),
           finishedAt:
             (event.container.data[0].finishedAt = `${this.getFormatedDate()} ${this.getFormatedHour()}`),
+          duration: this.calculateDurationTime(event.container.data[0])
         };
+        console.log('>>>',body_finished)
         this.service
           .updateTask(event.container.data[0].id, body_finished)
           .subscribe();
@@ -139,5 +141,41 @@ export class TaskPageComponent implements OnInit {
         (task: { status: string }) => task.status == 'cancelled'
       );
     });
+  }
+
+  calculateDurationTime(item: any) {
+    let convertedCreatedDate = this.convertDateFormat(item.createdAt);
+    let convertedFinishedDate = this.convertDateFormat(item.finishedAt);
+    let createdTime = new Date(convertedCreatedDate);
+    let finishedTime = new Date(convertedFinishedDate);
+    const diffInMs: number = Math.abs(
+      createdTime.getTime() - finishedTime.getTime()
+    );
+    return this.convertDiff(diffInMs)
+  }
+
+  convertDiff(ms: number): string {
+    const minutes = Math.round(ms / 60000);
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
+    const formattedMinutes =
+      remainingMinutes < 10 ? `0${remainingMinutes}` : `${remainingMinutes}`;
+    return `${formattedHours}:${formattedMinutes}`;
+  }
+
+  convertDateFormat(date: string) {
+    let formatedDate = date.split('/');
+    let day = Number(formatedDate[0]);
+    let formatedDay = day < 10 ? `0${day}` : `${day}`;
+    let month = Number(formatedDate[1]);
+    let formatedMonth = month < 10 ? `0${month}` : `${month}`;
+    let formatedYear = formatedDate[2].split(' ');
+    let year = formatedYear[0];
+    let formatedHour = formatedYear[1];
+    let newHour = formatedHour.split(':');
+    let hour = newHour[0];
+    let minute = newHour[1];
+    return `${year}-${formatedMonth}-${formatedDay}T${hour}:${minute}`;
   }
 }
